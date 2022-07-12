@@ -1,0 +1,6 @@
+type pointer = u64
+
+type alloc-error = string
+
+try-allocate: func(size: u64) -> expected<pointer, alloc-error>
+try-free: func(ptr: pointer) -> option<alloc-error>

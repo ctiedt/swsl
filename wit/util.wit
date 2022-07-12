@@ -1,0 +1,3 @@
+type timestamp = u64
+
+get-time: func() -> timestamp

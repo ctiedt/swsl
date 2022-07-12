@@ -1,0 +1,32 @@
+type channel-error = string
+
+variant mode {
+    read,
+    write,
+}
+
+record storage-info {
+    name: string,
+    mode: mode,
+}
+
+record network-info {
+    ip: string,
+    port: u16,
+}
+
+type device-id = u64
+
+variant channel-kind {
+    network(network-info),
+    storage(storage-info),
+    device(device-id),
+    logging,
+}
+
+resource channel {
+    static open: func(kind: channel-kind) -> expected<channel, channel-error>
+    read: func() -> expected<list<u8>, channel-error>
+    write: func(data: list<u8>) -> option<channel-error>
+    close: func() -> option<channel-error>
+}
